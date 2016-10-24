@@ -1,20 +1,24 @@
 #include <iostream>
 #include <random>
+#include "point.h"
 
 using namespace std;
 
-int main () {
+// This oracle compares two points on a given attribute
+// with the error probability of p
+int oracle(point a, point b, int d) {
     double p = 0.25;
-    int sum = 0;
-    // constructing a random_device that will act as the probabilistic oracle
     random_device rd;
     mt19937 gen(rd());
-    discrete_distribution<> distrib({ 1-p, p });
-    // 1 - p is the probability for zero
-    for (int i = 0; i < 1000; i++) {
-        sum += distrib(gen);
+    if (a.attribute[d] < b.attribute[d]) {
+        discrete_distribution<> distrib({ 1-p, p });
+        return distrib(gen);
+    } else {
+        discrete_distribution<> distrib({ p, 1-p });
+        return distrib(gen);
     }
-    cout << sum << endl;
+}
 
+int main() {
     return 0;
 }
