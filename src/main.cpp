@@ -1,6 +1,4 @@
-#include "header.h"
+#include <iostream>
 
-int main() {
-    cout << "BUILD PASSING" << endl;
-    return 0;
-}
+using namespace std;
+
