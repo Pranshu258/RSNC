@@ -19,3 +19,17 @@ void create_model(int N, int D, int* values, float *** model) {
         }
     }
 }
+
+void print_model(int D, int* values, float *** model) {
+    cout << fixed;
+    cout << setprecision(2);
+    for (int i = 0; i < D; i++) {
+        cout << "Comparison Model for Dimension: " << i << endl;
+        for (int x = 0; x < values[i]; x++) {
+            for (int y = 0; y < values[i]; y++) {
+                cout << model[i][x][y] << " ";
+            }
+            cout << endl;
+        }
+    }
+}

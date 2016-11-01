@@ -13,8 +13,8 @@ int main() {
     // Create the Comparison Model
     float **model[N];
     create_model(N, D, values, model);
-    print_model(model);
-    
+    print_model(D, values, model);
+
 
     // Sort the Dataset on each dimension
 
