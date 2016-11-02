@@ -14,14 +14,14 @@ int main() {
     create_model(D, values, model);
     print_model(D, values, model);
 
-    // CREATE THE DATASET
+    // CREATE THE DATASET OBJECT
     int N;
     cout << "Enter the number of Samples: "; cin >> N;
-    int **noisydata = new int*[N];
-    create_noisydata(N, D, values, noisydata);
-    print_noisydata(N, D, noisydata);
+    data DATA(N, D, model, values);
+    DATA.print();
 
     // Sort the Dataset on each dimension
+    
 
     // Find the Skyline Set
 
