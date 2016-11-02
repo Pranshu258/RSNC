@@ -1,6 +1,6 @@
 #include "header.h"
 
-void create_model(int N, int D, int* values, float *** model) {
+void create_model(int D, int* values, float *** model) {
     // Create the Random Number Generator Object
     mt19937_64 rng;
     uint64_t timeSeed = chrono::high_resolution_clock::now().time_since_epoch().count();

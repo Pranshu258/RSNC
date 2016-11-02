@@ -1,20 +1,25 @@
 #include "header.h"
 
 int main() {
-    // Create a Dataset
-    int N, D;
-    cout << "Enter the number of Samples: "; cin >> N;
+    // CREATE THE COMPARISON MODEL
+    int D;
+    cout << "CREATE THE COMPARISON MODEL" << endl;
     cout << "Enter the number of Dimensions: "; cin >> D;
     int values[D];
     cout << "Enter the number of possible values in each dimension: \n";
     for (int i = 0; i < D; i++) {
         cout << i << ": "; cin >> values[i];
     }
-    // Create the Comparison Model
-    float **model[N];
-    create_model(N, D, values, model);
+    float **model[D];
+    create_model(D, values, model);
     print_model(D, values, model);
 
+    // CREATE THE DATASET
+    int N;
+    cout << "Enter the number of Samples: "; cin >> N;
+    int **noisydata = new int*[N];
+    create_noisydata(N, D, values, noisydata);
+    print_noisydata(N, D, noisydata);
 
     // Sort the Dataset on each dimension
 
