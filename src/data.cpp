@@ -22,7 +22,7 @@ void data::print () {
     for (list<point>::iterator p = DATA.begin(); p != DATA.end(); p++) {
         cout << (*p).id << ": ";
         for (int j = 0; j < D; j++) {
-            cout << j << "_" << (*p).features[j] << " ";
+            cout << "\t" << j << "_" << (*p).features[j] << " ";
         }
         cout << endl;
     }

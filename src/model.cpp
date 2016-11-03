@@ -37,3 +37,7 @@ void model::print() {
         }
     }            
 }
+
+void model::create_world() {
+    return;
+}

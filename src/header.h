@@ -6,9 +6,6 @@
 
 using namespace std;
 
-void create_model(int D, int* values, double *** model);
-void print_model(int D, int* values, double *** model);
-
 struct point {
     int id;
     int * features;
@@ -20,8 +17,10 @@ class model {
         int D;
         int * dim_domains;
         double *** comparators;
+        double ** world;
         // Methods
         model(int d, int* values);
+        void create_world();
         void print();
 };
 
