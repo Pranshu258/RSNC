@@ -10,18 +10,17 @@ int main() {
     for (int i = 0; i < D; i++) {
         cout << i << ": "; cin >> values[i];
     }
-    float **model[D];
-    create_model(D, values, model);
-    print_model(D, values, model);
+    model MODEL(D, values);
+    MODEL.print();
 
     // CREATE THE DATASET OBJECT
     int N;
     cout << "Enter the number of Samples: "; cin >> N;
-    data DATA(N, D, model, values);
+    data DATA(N, D, values);
     DATA.print();
 
-    // Sort the Dataset on each dimension
-    
+    // CREATE AN INSTANCE OF CONCRETE DATA (POSSIBLE WORLD WITH ERROR)
+    // DATA.order();
 
     // Find the Skyline Set
 

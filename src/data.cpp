@@ -1,14 +1,12 @@
 #include "header.h"
 
-data::data (int n, int d, float *** model, int * values) {
+data::data (int n, int d, int * values) {
     N = n; D = d;
-    DIM_DOMAINS = values;
-    MODEL = model;
     for (int i = 0; i < N; i++) {
         point *p = new point;
         p->features = new int[D];
         p->id = i+1;
-        DATA.push_back(*p);               
+        DATA.push_back(*p);              
     }
     for (int j = 0; j < D; j++) {
         random_device rd;
@@ -24,7 +22,7 @@ void data::print () {
     for (list<point>::iterator p = DATA.begin(); p != DATA.end(); p++) {
         cout << (*p).id << ": ";
         for (int j = 0; j < D; j++) {
-            cout << (*p).features[j] << " ";
+            cout << j << "_" << (*p).features[j] << " ";
         }
         cout << endl;
     }

@@ -6,15 +6,23 @@
 
 using namespace std;
 
-void create_model(int D, int* values, float *** model);
-void print_model(int D, int* values, float *** model);
-
-void create_noisydata(int N, int D, int * values, int **noisydata);
-void print_noisydata(int N, int D, int **noisydata);
+void create_model(int D, int* values, double *** model);
+void print_model(int D, int* values, double *** model);
 
 struct point {
     int id;
     int * features;
+};
+
+class model {
+    public:
+        // Fields
+        int D;
+        int * dim_domains;
+        double *** comparators;
+        // Methods
+        model(int d, int* values);
+        void print();
 };
 
 class data {
@@ -23,9 +31,8 @@ class data {
         list<point> DATA;
         int N;
         int D;
-        int *DIM_DOMAINS;
-        float *** MODEL;
+        int comparing_dim;
         // Methods
-        data (int n, int d, float *** model, int * values);
+        data (int n, int d, int * values);
         void print ();
 };
