@@ -39,6 +39,27 @@ void model::print() {
     }            
 }
 
+bool model::compare(const int &x, const int &y) {
+    return y < x;
+}
+
 void model::create_world() {
-    return;
+    for (int i = 0; i < D; i++) {
+        list<int> L;
+        for (int j = 0; j < dim_domains[i]; j++) {
+            L.push_back(j);
+        }
+        L.sort(&compare);
+        world.push_back(L);
+    }
+}
+
+void model::print_world() {
+    for (list<list<int> >::iterator L = world.begin(); L != world.end(); L++) {
+        auto dim = *L;
+        for (list<int>::iterator d = dim.begin(); d != dim.end(); d++) {
+            cout << *d << " ";
+        }
+        cout << endl;
+    }
 }

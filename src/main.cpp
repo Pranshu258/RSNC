@@ -12,6 +12,8 @@ int main() {
     }
     model MODEL(D, dim_domains);
     MODEL.print();
+    MODEL.create_world();
+    MODEL.print_world();
 
     // CREATE THE DATASET OBJECT
     int N;

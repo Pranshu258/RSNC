@@ -17,10 +17,12 @@ class model {
         int D;
         int * dim_domains;
         double *** comparators;
-        double ** world;
+        list<list<int> > world;
         // Methods
         model(int d, int* dim_domains);
+        static bool compare(const int &x, const int &y);
         void create_world();
+        void print_world();
         void print();
 };
 
