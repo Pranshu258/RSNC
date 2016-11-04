@@ -39,7 +39,9 @@ void model::print() {
     }            
 }
 
-bool model::compare(const int &x, const int &y) {
+bool model::operator () (const int &x, const int &y) {
+    // Can use the member variables of the model object here :) GREAT :D
+
     return y < x;
 }
 
@@ -49,7 +51,7 @@ void model::create_world() {
         for (int j = 0; j < dim_domains[i]; j++) {
             L.push_back(j);
         }
-        L.sort(&compare);
+        L.sort(*this);
         world.push_back(L);
     }
 }
