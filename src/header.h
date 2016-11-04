@@ -38,5 +38,6 @@ class data {
         int D;
         // Methods
         data (int n, int d, int * dim_domains);
-        void print ();
+        void label_data(vector<vector<int> > world);
+        void print (int mode);
 };

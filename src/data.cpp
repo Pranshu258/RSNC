@@ -18,16 +18,23 @@ data::data (int n, int d, int * dim_domains) {
     }            
 }
 
-void data::print () {
+void data::print (int mode) {
     for (list<point>::iterator p = DATA.begin(); p != DATA.end(); p++) {
         cout << (*p).id << ": ";
         for (int j = 0; j < D; j++) {
-            cout << "\t" << j << "_" << (*p).features[j] << " ";
+            if (mode == 0)
+                cout << "\t" << j << "_" << (*p).features[j];
+            else
+                cout << "\t" << (*p).features[j];
         }
         cout << endl;
     }
 }
 
-// void data::label_data(list<list<int> > world) {
-//     return;
-// }
+void data::label_data(vector<vector<int> > world) {
+    for (list<point>::iterator p = DATA.begin(); p != DATA.end(); p++) {
+        for (int j = 0; j < D; j++) {
+            (*p).features[j] = world[j][(*p).features[j]];
+        }
+    }    
+}

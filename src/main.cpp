@@ -19,11 +19,12 @@ int main() {
     int N;
     cout << "Enter the number of Samples: "; cin >> N;
     data DATA(N, D, dim_domains);       // create a dataset with attributes having noisy values 
-    DATA.print();
+    DATA.print(0);
 
     // CREATE AN INSTANCE OF CONCRETE DATA (POSSIBLE WORLD WITH ERROR)
-    // DATA.label_data(MODEL.world);
-
+    DATA.label_data(MODEL.world);
+    cout << "Labeled Data: " << endl;
+    DATA.print(1);
     // Find the Skyline Set
 
     // Find the Representative Skyline Set
