@@ -19,7 +19,7 @@ class model {
         double *** comparators;
         double ** world;
         // Methods
-        model(int d, int* values);
+        model(int d, int* dim_domains);
         void create_world();
         void print();
 };
@@ -30,8 +30,7 @@ class data {
         list<point> DATA;
         int N;
         int D;
-        int comparing_dim;
         // Methods
-        data (int n, int d, int * values);
+        data (int n, int d, int * dim_domains);
         void print ();
 };

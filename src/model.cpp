@@ -1,8 +1,8 @@
 #include "header.h"
 
-model::model(int d, int* values) {
+model::model(int d, int* dd) {
     D = d;
-    dim_domains = values;
+    dim_domains = dd;
     comparators = new double**[D];
 
     // Create the Random Number Generator Object
@@ -13,12 +13,13 @@ model::model(int d, int* values) {
     // initialize a uniform distribution between 0 and 1
     std::uniform_real_distribution<double> unif(0, 1);
     for (int i = 0; i < D; i++) {
-        comparators[i] = new double*[values[i]];
-        for (int x = 0; x < values[i]; x++) {
-            comparators[i][x] = new double[values[i]];
+        comparators[i] = new double*[dim_domains[i]];
+        for (int x = 0; x < dim_domains[i]; x++) {
+            comparators[i][x] = new double[dim_domains[i]];
             comparators[i][x][x] = 0;
             for (int y = 0; y < x; y++) {
-                comparators[i][x][y] = comparators[i][y][x] = unif(rng);
+                comparators[i][x][y] = unif(rng);
+                comparators[i][y][x] = 1 - comparators[i][x][y];
             }
         }
     }

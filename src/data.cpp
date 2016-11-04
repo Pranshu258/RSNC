@@ -1,6 +1,6 @@
 #include "header.h"
 
-data::data (int n, int d, int * values) {
+data::data (int n, int d, int * dim_domains) {
     N = n; D = d;
     for (int i = 0; i < N; i++) {
         point *p = new point;
@@ -11,7 +11,7 @@ data::data (int n, int d, int * values) {
     for (int j = 0; j < D; j++) {
         random_device rd;
         mt19937 rng(rd());    
-        uniform_int_distribution<int> uni(0,values[j]-1);
+        uniform_int_distribution<int> uni(0,dim_domains[j]-1);
         for (list<point>::iterator p = DATA.begin(); p != DATA.end(); p++) {
             (*p).features[j] = uni(rng);
         }
