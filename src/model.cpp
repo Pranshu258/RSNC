@@ -39,11 +39,29 @@ void model::print() {
     }            
 }
 
-bool model::operator () (const int &x, const int &y) {
-    // Can use the member variables of the model object here :) GREAT :D
 
-    return y < x;
+// IMPLEMENT NOISY COMPARISON HERE ///////////////////////////////////////////
+bool model::operator () (const int &x, const int &y) { 
+    // Can use the member variables of the model object here :) GREAT :D
+    double e = 0.1; // The error parameter for noisy comparison
+    double p = comparators[oracle_state][x][y];
+    int t = dim_domains[oracle_state];
+    t = t*log2(t)/e;
+    random_device rd;
+    mt19937 gen(rd());
+    if (p < 0.5)
+        p = p + e;
+    else
+        p = p - e;
+    discrete_distribution<> distrib({1-p, p});
+    int comp = 0;
+    for (int i = 0; i < t; i++) {
+        comp += distrib(gen);
+    }
+    return comp > t/2;
 }
+/////////////////////////////////////////////////////////////////////////////
+
 
 void model::create_world() {
     for (int i = 0; i < D; i++) {
@@ -51,12 +69,14 @@ void model::create_world() {
         for (int j = 0; j < dim_domains[i]; j++) {
             L.push_back(j);
         }
+        oracle_state = i;
         L.sort(*this);
         world.push_back(L);
     }
 }
 
 void model::print_world() {
+    cout << "The World Instance: " << endl;
     for (list<list<int> >::iterator L = world.begin(); L != world.end(); L++) {
         auto dim = *L;
         for (list<int>::iterator d = dim.begin(); d != dim.end(); d++) {

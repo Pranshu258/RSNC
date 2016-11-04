@@ -3,6 +3,7 @@
 #include <chrono>
 #include <iomanip>
 #include <list>
+#include <cmath>
 
 using namespace std;
 
@@ -15,6 +16,7 @@ class model {
     public:
         // Fields
         int D;
+        int oracle_state;
         int * dim_domains;
         double *** comparators;
         list<list<int> > world;

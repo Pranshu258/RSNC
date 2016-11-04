@@ -1,7 +1,7 @@
 #include "header.h"
 
 data::data (int n, int d, int * dim_domains) {
-    N = n; D = d;
+    N = n; D = d; // N is the number of sample sto be created, D is the number of dimensions
     for (int i = 0; i < N; i++) {
         point *p = new point;
         p->features = new int[D];
@@ -13,7 +13,7 @@ data::data (int n, int d, int * dim_domains) {
         mt19937 rng(rd());    
         uniform_int_distribution<int> uni(0,dim_domains[j]-1);
         for (list<point>::iterator p = DATA.begin(); p != DATA.end(); p++) {
-            (*p).features[j] = uni(rng);
+            (*p).features[j] = uni(rng);  // randomly assign a noisy value to the attribute
         }
     }            
 }
