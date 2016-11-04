@@ -22,7 +22,7 @@ int main() {
     DATA.print();
 
     // CREATE AN INSTANCE OF CONCRETE DATA (POSSIBLE WORLD WITH ERROR)
-    
+    // DATA.label_data(MODEL.world);
 
     // Find the Skyline Set
 

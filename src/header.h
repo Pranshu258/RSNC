@@ -3,7 +3,9 @@
 #include <chrono>
 #include <iomanip>
 #include <list>
+#include <vector>
 #include <cmath>
+#include <algorithm>
 
 using namespace std;
 
@@ -19,7 +21,7 @@ class model {
         int oracle_state;
         int * dim_domains;
         double *** comparators;
-        list<list<int> > world;
+        vector<vector<int> > world;
         // Methods
         model(int d, int* dim_domains);
         bool operator () (const int &x, const int &y);

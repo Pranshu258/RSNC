@@ -27,3 +27,7 @@ void data::print () {
         cout << endl;
     }
 }
+
+// void data::label_data(list<list<int> > world) {
+//     return;
+// }
