@@ -27,8 +27,8 @@ int main() {
     DATA.print(1);
 
     // FIND THE SKYLINE
-    
-
+    skyline SKYLINEALG(N, D, DATA.DATA);
+    SKYLINEALG.finder();
     // Find the Representative Skyline Set
 
     return 0;

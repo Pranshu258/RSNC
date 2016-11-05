@@ -6,6 +6,7 @@ data::data (int n, int d, int * dim_domains) {
         point *p = new point;
         p->features = new int[D];
         p->id = i+1;
+        p->timestamp = N*N;
         DATA.push_back(*p);              
     }
     for (int j = 0; j < D; j++) {

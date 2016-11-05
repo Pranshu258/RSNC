@@ -2,7 +2,7 @@
 
 model::model(int d, int* dd) {
     D = d;
-    dim_domains = dd;
+    dim_domains = dd;       // do deepcopy here, to avoid memory errors
     comparators = new double**[D];
 
     // Create the Random Number Generator Object
