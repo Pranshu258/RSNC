@@ -49,6 +49,7 @@ class skyline {
         list<point> DATA;
         int N;
         int D;
+        bool *is_skyline;
         bool operator () (const point &p1, const point &p2);
         void finder();
         skyline (int N, int D, list<point> data);

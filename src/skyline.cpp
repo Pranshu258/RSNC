@@ -21,7 +21,7 @@ void skyline::finder () {
     // Sort the data by entropy
     DATA.sort(*this);
     int win_size = 3;
-    bool *is_skyline = new bool[N];
+    is_skyline = new bool[N];
 	for (int i = 0; i < N; i++) {
 		is_skyline[i] = false;
 	}
