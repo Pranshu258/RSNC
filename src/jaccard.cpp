@@ -33,7 +33,7 @@ void skyline::print_jaccard_distances() {
     cout << endl;
     for (int i = 0; i < SKYLINE_SET.size(); i++) {
         cout << skyline_point_ids[i] << ":";
-        for (int j = 0; j <= i; j++) {
+        for (int j = 0; j < SKYLINE_SET.size(); j++) {
             cout << "\t" << jaccard_distances[i][j];
         }
         cout << endl;

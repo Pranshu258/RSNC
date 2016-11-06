@@ -39,10 +39,10 @@ void skyline::represent() {
                     min_d = d;
                 }
             }
-            if (max < min_d) {
+            if (max < min_d || (max == min_d && (s->second).size() > (next_s->second).size())) {
                 next_s = s;
                 max = min_d;
-            }   
+            }
         }
         cout << next_s->first << " ";
         A.insert(*next_s);
