@@ -2,7 +2,11 @@
 
 model::model(int d, int* dd) {
     D = d;
-    dim_domains = dd;       // do deepcopy here, to avoid memory errors
+    dim_domains = dd;
+    dim_domains = new int[D]; // This array stores the number of possible values for each dimension
+    for (int i = 0; i < D; i++) {
+        dim_domains[i] = dd[i];
+    }
     comparators = new double**[D];
 
     // Create the Random Number Generator Object

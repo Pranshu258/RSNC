@@ -46,7 +46,7 @@ class data {
 
 class skyline {
     public:
-        list<point> DATA;
+        list<point> DATA; 
         int N;
         int D;
         bool *is_skyline;
