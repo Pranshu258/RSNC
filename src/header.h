@@ -6,6 +6,7 @@
 #include <vector>
 #include <cmath>
 #include <algorithm>
+#include <map>
 
 using namespace std;
 using namespace std::chrono;
@@ -16,6 +17,8 @@ struct point {
     double timestamp;
 };
 
+
+// This class defines the comparison model for possible values for each dimension
 class model {
     public:
         // Fields
@@ -47,10 +50,14 @@ class data {
 class skyline {
     public:
         list<point> DATA; 
+        vector<point> SKYLINE_SET;
+        map<int, list<int> > DOMINANCES;
         int N;
         int D;
-        bool *is_skyline;
+        skyline (int N, int D, list<point> data);
         bool operator () (const point &p1, const point &p2);
         void finder();
-        skyline (int N, int D, list<point> data);
+        void find_dominance_sets();
+        void print_dominance_sets();
+        
 };

@@ -29,6 +29,10 @@ int main() {
     // FIND THE SKYLINE
     skyline SKYLINES(N, D, DATA.DATA);
     SKYLINES.finder();
+    
+    SKYLINES.find_dominance_sets();
+    SKYLINES.print_dominance_sets();
+
     // Find the Representative Skyline Set
 
     return 0;

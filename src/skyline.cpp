@@ -19,12 +19,10 @@ bool skyline::operator () (const point &p1, const point &p2) {
 
 void skyline::finder () {
     // Sort the data by entropy
+	auto OD = DATA;
     DATA.sort(*this);
     int win_size = 3;
-    is_skyline = new bool[N];
-	for (int i = 0; i < N; i++) {
-		is_skyline[i] = false;
-	}
+	
     high_resolution_clock::time_point t1 = high_resolution_clock::now();
 
 	// BLOCK NESTED LOOP ALGORITHM FOR SKYLINES
@@ -92,7 +90,8 @@ void skyline::finder () {
 				if ((*swp).timestamp < (temp_data.front()).timestamp || temp_data.size() == 0) {
 					// cout << "Removing " << swp->id << " from window as valid skyline" << endl;
 					if (swp->id <= N) {
-						is_skyline[(swp->id)-1] = true;
+						//is_skyline[(swp->id)-1] = true;
+						SKYLINE_SET.push_back(*swp);
 						swp = skyline_window.erase(swp);
 						continue;
 					} else {
@@ -120,19 +119,15 @@ void skyline::finder () {
 	duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
 
 	cout << "Skyline Points: " << endl;
-	int printed = 0;
-	for (int i = 0; i < N; i++) {
-		if (is_skyline[i]) {
-			cout << i+1 << "\t";
-			printed += 1;
-			if (printed % 10 == 0)
-				cout << endl;
-		}
+
+	for (vector<point>::iterator s = SKYLINE_SET.begin(); s != SKYLINE_SET.end(); s++) {
+		cout << s->id << "\t";
 	}
+
 	cout << endl;
-	cout << "Number of skyline points: " << printed << endl;
+	cout << "Number of skyline points: " << SKYLINE_SET.size() << endl;
 	cout << "Number of comparisons: " << comparisons << endl;
 	cout << "Time taken: " << time_span.count() << " seconds" << endl;
-
+	DATA = OD;
     return;
 }
