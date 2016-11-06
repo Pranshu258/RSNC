@@ -51,6 +51,8 @@ class skyline {
     public:
         list<point> DATA; 
         vector<point> SKYLINE_SET;
+        int * skyline_point_ids;
+        double ** jaccard_distances;
         map<int, list<int> > DOMINANCES;
         int N;
         int D;
@@ -59,5 +61,8 @@ class skyline {
         void finder();
         void find_dominance_sets();
         void print_dominance_sets();
+        double jaccard_similarity(list<int> set1, list<int> set2);
+        void compute_jaccard_distances();
+        void print_jaccard_distances();
         
 };

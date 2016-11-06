@@ -118,11 +118,11 @@ void skyline::finder () {
 	high_resolution_clock::time_point t2 = high_resolution_clock::now();
 	duration<double> time_span = duration_cast<duration<double>>(t2 - t1);
 
-	cout << "Skyline Points: " << endl;
+	// cout << "Skyline Points: " << endl;
 
-	for (vector<point>::iterator s = SKYLINE_SET.begin(); s != SKYLINE_SET.end(); s++) {
-		cout << s->id << "\t";
-	}
+	// for (vector<point>::iterator s = SKYLINE_SET.begin(); s != SKYLINE_SET.end(); s++) {
+	// 	cout << s->id << "\t";
+	// }
 
 	cout << endl;
 	cout << "Number of skyline points: " << SKYLINE_SET.size() << endl;

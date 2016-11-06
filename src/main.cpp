@@ -33,6 +33,9 @@ int main() {
     SKYLINES.find_dominance_sets();
     SKYLINES.print_dominance_sets();
 
+    SKYLINES.compute_jaccard_distances();
+    SKYLINES.print_jaccard_distances();
+
     // Find the Representative Skyline Set
 
     return 0;
