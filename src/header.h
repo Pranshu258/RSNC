@@ -64,5 +64,6 @@ class skyline {
         double jaccard_similarity(list<int> set1, list<int> set2);
         void compute_jaccard_distances();
         void print_jaccard_distances();
+        void represent();
         
 };

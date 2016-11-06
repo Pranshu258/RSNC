@@ -36,7 +36,7 @@ int main() {
     SKYLINES.compute_jaccard_distances();
     SKYLINES.print_jaccard_distances();
 
-    // Find the Representative Skyline Set
+    SKYLINES.represent();
 
     return 0;
 }
