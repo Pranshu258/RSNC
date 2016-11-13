@@ -3,7 +3,6 @@
 // This method generates a comparison model for all the possible attribute values
 model::model(int d, int* dd) {
     D = d;
-    dim_domains = dd;
     dim_domains = new int[D]; // This array stores the number of possible values for each dimension
     for (int i = 0; i < D; i++) {
         dim_domains[i] = dd[i];
@@ -52,7 +51,7 @@ bool model::operator () (const int &x, const int &y) {
     double e = 0.1; // The error parameter for noisy comparison
     double p = comparators[oracle_state][x][y];
     int t = dim_domains[oracle_state];
-    t = t*log2(t)/e;
+    t = 1 + log2(t*log2(t)/e);
     random_device rd;
     mt19937 gen(rd());
     if (p < 0.5)
@@ -71,14 +70,22 @@ bool model::operator () (const int &x, const int &y) {
 // This method creates a probabilistic world instance of the attribute values 
 // as per the noisy comparison model
 void model::create_world() {
+    
     for (int i = 0; i < D; i++) {
-        vector<int> L;
+        list<int> L;
         for (int j = 0; j < dim_domains[i]; j++) {
             L.push_back(j);
         }
         oracle_state = i;
-        sort(L.begin(), L.end(), *this);
-        world.push_back(L);
+        L.sort(*this);
+        //cout << "sorted " << i << endl;
+        vector<int> V;
+        for (list<int>::iterator d = L.begin(); d != L.end(); d++) {
+            V.push_back(*d);
+        }       
+        world.push_back(V);
+        L.clear();
+        V.clear();
     }
 }
 
