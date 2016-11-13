@@ -3,16 +3,20 @@
 
 The project involves the implementation of the following modules:
 * Sorting the dataset using noisy comparisons on each dimension
-* Using the sorted data to find representative skyline
+* Using the sorted data to find representative skylines
 
 ## Module 1: Sorting with Noisy Comparisons
-Details here
+We sort the attributes of each dimension by repetively comparing each pair with the help of the 
+noisy comparison model and then taking the majority vote.
+The indices of the values so sorted can be treated as their symbolic values which can be used to find the skylines.
 
 ## Module 2: Finding Skylines
-Details here
+We use the SFS algorithm to find out the skylines of the given dataset. The symbolic values of the attributes are assumed 
+to be the true values. 
 
 ## Module 3: Finding Representative Skylines
-Details here
+For representative skylines we find the jaccard distances between the skyline points and then compute the 
+distance based represenative order of all the skyline points.
 
 ## Compilation
 g++ -std=c++11 src/*.cpp -o bin/rsnc

@@ -1,5 +1,6 @@
 #include "header.h"
 
+// This method finds the dominance set of each skyline
 void skyline::find_dominance_sets () {
 	for (vector<point>::iterator s = SKYLINE_SET.begin(); s != SKYLINE_SET.end(); s++) {
         pair<int, list<int> > PAIR;
@@ -26,6 +27,7 @@ void skyline::find_dominance_sets () {
 	}
 }
 
+// This method prints the dominance set of each skyline
 void skyline::print_dominance_sets() {
     cout << "DOMINANCE SETS:" << endl;
     for (map<int, list<int> >::iterator it = DOMINANCES.begin(); it != DOMINANCES.end(); it++) {

@@ -1,5 +1,6 @@
 #include "header.h"
 
+// This method computes the jaccard similarity of two skyline points
 double skyline::jaccard_similarity(list<int> s1, list<int> s2) {
     vector<int> common_points;
     set_intersection(s1.begin(),s1.end(),s2.begin(),s2.end(), std::back_inserter(common_points));
@@ -8,6 +9,7 @@ double skyline::jaccard_similarity(list<int> s1, list<int> s2) {
     return d;
 }
 
+// This method computes the jaccard_distances between for all the pairs of skyline points
 void skyline::compute_jaccard_distances() {
     jaccard_distances = new double*[SKYLINE_SET.size()];
     skyline_point_ids = new int[SKYLINE_SET.size()];
@@ -25,6 +27,7 @@ void skyline::compute_jaccard_distances() {
     }
 }
 
+// This method prints the jaccard_distances of all the pairs of skyline points
 void skyline::print_jaccard_distances() {
     cout << "JACCARD DISTANCE TABLE:" << endl;
     for (int i = 0; i < SKYLINE_SET.size(); i++) {
