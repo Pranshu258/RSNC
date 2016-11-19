@@ -127,7 +127,7 @@ void skyline::finder () {
 	cout << endl;
 	cout << "Number of skyline points: " << SKYLINE_SET.size() << endl;
 	cout << "Number of comparisons: " << comparisons << endl;
-	cout << "Time taken: " << time_span.count() << " seconds" << endl;
+	// cout << "Time taken: " << time_span.count() << " seconds" << endl;
 	DATA = OD;
     return;
 }

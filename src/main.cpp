@@ -1,6 +1,8 @@
 #include "header.h"
 
 int main(int argc, char *argv[]) {
+    high_resolution_clock::time_point t1, t2;
+    double timetaken = 0;
 
     if (argc != 3) {
 		cout << "Usage: ./main new_model new_data" << endl;
@@ -30,7 +32,11 @@ int main(int argc, char *argv[]) {
     }
      
     model MODEL(D, dim_domains); 
+
+    t1 = high_resolution_clock::now();
     MODEL.create_world();  // create a possible world with a discrete ordering on the noiy values for each dimension
+    t2 = high_resolution_clock::now();
+    timetaken += (duration_cast<duration<double>>(t2 - t1)).count();
     //MODEL.print_world();
 
     // CREATE THE DATASET OBJECT
@@ -46,11 +52,15 @@ int main(int argc, char *argv[]) {
     //DATA.print(1);
 
     // CREATE AN INSTANCE OF CONCRETE DATA (POSSIBLE WORLD WITH ERROR)
+    t1 = high_resolution_clock::now();
     DATA.label_data(MODEL.world);
+    t2 = high_resolution_clock::now();
+    timetaken += (duration_cast<duration<double>>(t2 - t1)).count();
     //cout << "Labeled Data: " << endl;
     //DATA.print(1);
 
     // FIND THE SKYLINE
+    t1 = high_resolution_clock::now();
     skyline SKYLINES(N, D, DATA.DATA);
     SKYLINES.finder();
     
@@ -61,6 +71,9 @@ int main(int argc, char *argv[]) {
     //SKYLINES.print_jaccard_distances();
 
     SKYLINES.represent();
+    t2 = high_resolution_clock::now();
+    timetaken += (duration_cast<duration<double>>(t2 - t1)).count();
 
+    cout << "Time taken: " << timetaken << " seconds" << endl;
     return 0;
 }
