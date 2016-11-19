@@ -68,8 +68,8 @@ int main(int argc, char *argv[]) {
     //SKYLINES.print_dominance_sets();
 
     SKYLINES.compute_jaccard_distances();
-    //SKYLINES.print_jaccard_distances();
-
+    SKYLINES.print_jaccard_distances();
+    
     SKYLINES.represent();
     t2 = high_resolution_clock::now();
     timetaken += (duration_cast<duration<double>>(t2 - t1)).count();

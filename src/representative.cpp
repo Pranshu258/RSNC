@@ -20,6 +20,11 @@ void skyline::represent() {
             max = dominated.size();
         }
     }
+
+    if (max == 0) {
+        // none of the skylines dominate anyone
+        a = S.begin();
+    }
     cout << a->first << " ";
     A.insert(*a);
     S.erase(a);
