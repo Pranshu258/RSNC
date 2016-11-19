@@ -24,6 +24,7 @@ class model {
     public:
         // Fields
         int D;
+        double e;
         int oracle_state;
         int * dim_domains;
         double *** comparators;
@@ -70,3 +71,4 @@ class skyline {
 };
 
 void generate_modelfile(int D, int* dim_domains);
+void generate_datafile (int N, int D, int * dim_domains);

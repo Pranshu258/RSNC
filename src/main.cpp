@@ -1,6 +1,15 @@
 #include "header.h"
 
-int main() {
+int main(int argc, char *argv[]) {
+
+    if (argc != 3) {
+		cout << "Usage: ./main new_model new_data" << endl;
+		exit(0);
+	}
+    string new_model = argv[1];
+    string new_data = argv[2];
+    // cout << (new_model == "t") << " " << (new_data == "t") << endl;
+
     // CREATE THE COMPARISON MODEL
     int D; // D is the number of dimensions
     //cout << "CREATE THE COMPARISON MODEL" << endl;
@@ -16,8 +25,11 @@ int main() {
         dims_file >> dim_domains[i];
     }
 
-    generate_modelfile(D, dim_domains);
-    model MODEL(D, dim_domains); // create the comparison model for the noisy values
+    if (new_model == "t") {
+        generate_modelfile(D, dim_domains); // create the comparison model for the noisy values
+    }
+     
+    model MODEL(D, dim_domains); 
     MODEL.create_world();  // create a possible world with a discrete ordering on the noiy values for each dimension
     //MODEL.print_world();
 
@@ -25,8 +37,13 @@ int main() {
     int N;
     // cout << "Enter the number of Samples: "; 
     samples_file >> N;
-    data DATA(N, D, dim_domains);       // create a dataset with attributes having noisy values 
-    //DATA.print(0);
+
+    if (new_data == "t" || new_model == "t") {
+        generate_datafile(N, D, dim_domains);          // create a dataset with attributes having noisy values
+    }
+    
+    data DATA(N, D, dim_domains);        
+    //DATA.print(1);
 
     // CREATE AN INSTANCE OF CONCRETE DATA (POSSIBLE WORLD WITH ERROR)
     DATA.label_data(MODEL.world);

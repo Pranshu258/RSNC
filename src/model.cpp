@@ -14,7 +14,7 @@ void generate_modelfile(int D, int* dim_domains) {
         for (int x = 0; x < dim_domains[i]; x++) {
             for (int y = 0; y < x; y++) {
                 double v = unif(rng);
-                model_file << v;
+                model_file << v << " ";
             }
             model_file << endl;
         }
@@ -29,6 +29,9 @@ model::model(int d, int* dd) {
     }
     comparators = new double**[D];
     ifstream model_file("input/model");
+    ifstream error_file("input/tolerance");
+    error_file >> e;
+    //cout << e ;
     for (int i = 0; i < D; i++) {
         comparators[i] = new double*[dim_domains[i]];
         for (int x = 0; x < dim_domains[i]; x++) {
@@ -61,7 +64,6 @@ void model::print() {
 // IMPLEMENT NOISY COMPARISON HERE ///////////////////////////////////////////
 bool model::operator () (const int &x, const int &y) { 
     // Can use the member variables of the model object here :) GREAT :D
-    double e = 0.1; // The error parameter for noisy comparison
     double p = comparators[oracle_state][x][y];
     int t = dim_domains[oracle_state];
     t = t*log2(t)/e;

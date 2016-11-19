@@ -1,5 +1,18 @@
 #include "header.h"
 
+void generate_datafile (int N, int D, int * dim_domains) {
+    ofstream data_file("input/data");
+    for (int j = 0; j < D; j++) {
+        random_device rd;
+        mt19937 rng(rd());    
+        uniform_int_distribution<int> uni(0,dim_domains[j]-1);
+        for (int i = 0; i < N; i++) {
+            data_file << uni(rng) << " ";  // randomly assign a noisy value to the attribute
+        }
+        data_file << endl;
+    }            
+}
+
 // This method generates N samples each with D attributes
 data::data (int n, int d, int * dim_domains) {
     N = n; D = d; // N is the number of sample sto be created, D is the number of dimensions
@@ -10,12 +23,12 @@ data::data (int n, int d, int * dim_domains) {
         p->timestamp = N*N;
         DATA.push_back(*p);              
     }
+    ifstream data_file("input/data");
     for (int j = 0; j < D; j++) {
-        random_device rd;
-        mt19937 rng(rd());    
-        uniform_int_distribution<int> uni(0,dim_domains[j]-1);
         for (list<point>::iterator p = DATA.begin(); p != DATA.end(); p++) {
-            (*p).features[j] = uni(rng);  // randomly assign a noisy value to the attribute
+            int v;
+            data_file >> v;
+            (*p).features[j] = v;  
         }
     }            
 }
