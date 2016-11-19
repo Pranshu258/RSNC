@@ -7,6 +7,7 @@
 #include <cmath>
 #include <algorithm>
 #include <map>
+#include <fstream>
 
 using namespace std;
 using namespace std::chrono;

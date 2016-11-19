@@ -1,14 +1,7 @@
 #include "header.h"
 
 // This method generates a comparison model for all the possible attribute values
-model::model(int d, int* dd) {
-    D = d;
-    dim_domains = new int[D]; // This array stores the number of possible values for each dimension
-    for (int i = 0; i < D; i++) {
-        dim_domains[i] = dd[i];
-    }
-    comparators = new double**[D];
-
+model::print_model(int d, int* dd) {
     // Create the Random Number Generator Object
     mt19937_64 rng;
     uint64_t timeSeed = chrono::high_resolution_clock::now().time_since_epoch().count();
@@ -17,12 +10,29 @@ model::model(int d, int* dd) {
     // initialize a uniform distribution between 0 and 1
     std::uniform_real_distribution<double> unif(0, 1);
     for (int i = 0; i < D; i++) {
+        for (int x = 0; x < dim_domains[i]; x++) {
+            for (int y = 0; y < x; y++) {
+                model_file << unif(rng);
+            }
+        }
+    }
+}
+
+model::model(int d, int* dd) {
+    D = d;
+    dim_domains = new int[D]; // This array stores the number of possible values for each dimension
+    for (int i = 0; i < D; i++) {
+        dim_domains[i] = dd[i];
+    }
+    comparators = new double**[D];
+    ifstream model_file("input/model");
+    for (int i = 0; i < D; i++) {
         comparators[i] = new double*[dim_domains[i]];
         for (int x = 0; x < dim_domains[i]; x++) {
             comparators[i][x] = new double[dim_domains[i]];
             comparators[i][x][x] = 0;
             for (int y = 0; y < x; y++) {
-                comparators[i][x][y] = unif(rng);
+                model_file >> comparators[i][x][y];
                 comparators[i][y][x] = 1 - comparators[i][x][y];
             }
         }
@@ -51,7 +61,7 @@ bool model::operator () (const int &x, const int &y) {
     double e = 0.1; // The error parameter for noisy comparison
     double p = comparators[oracle_state][x][y];
     int t = dim_domains[oracle_state];
-    t = 1 + log2(t*log2(t)/e);
+    t = t*log2(t)/e;
     random_device rd;
     mt19937 gen(rd());
     if (p < 0.5)
