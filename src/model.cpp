@@ -1,19 +1,22 @@
 #include "header.h"
 
 // This method generates a comparison model for all the possible attribute values
-model::print_model(int d, int* dd) {
+void generate_modelfile(int D, int* dim_domains) {
     // Create the Random Number Generator Object
     mt19937_64 rng;
     uint64_t timeSeed = chrono::high_resolution_clock::now().time_since_epoch().count();
     seed_seq ss{uint32_t(timeSeed & 0xffffffff), uint32_t(timeSeed>>32)};
     rng.seed(ss);
+    ofstream model_file("input/model");
     // initialize a uniform distribution between 0 and 1
     std::uniform_real_distribution<double> unif(0, 1);
     for (int i = 0; i < D; i++) {
         for (int x = 0; x < dim_domains[i]; x++) {
             for (int y = 0; y < x; y++) {
-                model_file << unif(rng);
+                double v = unif(rng);
+                model_file << v;
             }
+            model_file << endl;
         }
     }
 }

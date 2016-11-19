@@ -16,8 +16,8 @@ int main() {
         dims_file >> dim_domains[i];
     }
 
+    generate_modelfile(D, dim_domains);
     model MODEL(D, dim_domains); // create the comparison model for the noisy values
-    //MODEL.print();
     MODEL.create_world();  // create a possible world with a discrete ordering on the noiy values for each dimension
     //MODEL.print_world();
 

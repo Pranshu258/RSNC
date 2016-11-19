@@ -68,3 +68,5 @@ class skyline {
         void represent();
         
 };
+
+void generate_modelfile(int D, int* dim_domains);
