@@ -25,7 +25,9 @@ void skyline::represent() {
         // none of the skylines dominate anyone
         a = S.begin();
     }
-    //cout << a->first << " ";
+    
+    cout << a->first << " ";
+    
     A.insert(*a);
     S.erase(a);
     // Iterate
@@ -49,10 +51,12 @@ void skyline::represent() {
                 max = min_d;
             }
         }
-        //cout << next_s->first << " ";
+        
+        cout << next_s->first << " ";
+       
         A.insert(*next_s);
         S.erase(next_s);
     }
-    //cout << endl;
+    cout << endl;
     return;
 }

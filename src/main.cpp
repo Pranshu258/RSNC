@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
      
     model MODEL(D, dim_domains); 
 
-    int X = 10;
+    int X = 1;
     for (int x = 0; x < X; x++) {
         t1 = high_resolution_clock::now();
         MODEL.create_world();  // create a possible world with a discrete ordering on the noiy values for each dimension
@@ -79,8 +79,8 @@ int main(int argc, char *argv[]) {
         timetaken += (duration_cast<duration<double>>(t2 - t1)).count();
         skysize += SKYLINES.SKYLINE_SET.size();
     }
-    //cout << "Number of Skylines: " << SKYLINES.SKYLINE_SET.size() << endl;
-    //cout << "Time taken: " << timetaken << " seconds" << endl;
-    cout << N << " " << skysize/X << " " << timetaken/X << endl;
+    cout << "Number of Skylines: " << skysize/X << endl;
+    cout << "Time taken: " << timetaken/X << " seconds" << endl;
+    // cout << N << " " << skysize/X << " " << timetaken/X << endl;
     return 0;
 }
