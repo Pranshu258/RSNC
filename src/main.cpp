@@ -3,7 +3,8 @@
 int main(int argc, char *argv[]) {
     high_resolution_clock::time_point t1, t2;
     double timetaken = 0;
-
+    double skysize = 0;
+    int N;
     if (argc != 3) {
 		cout << "Usage: ./main new_model new_data" << endl;
 		exit(0);
@@ -28,52 +29,58 @@ int main(int argc, char *argv[]) {
     }
 
     if (new_model == "t") {
+        //cout << "changing model" << endl;
         generate_modelfile(D, dim_domains); // create the comparison model for the noisy values
     }
      
     model MODEL(D, dim_domains); 
 
-    t1 = high_resolution_clock::now();
-    MODEL.create_world();  // create a possible world with a discrete ordering on the noiy values for each dimension
-    t2 = high_resolution_clock::now();
-    timetaken += (duration_cast<duration<double>>(t2 - t1)).count();
-    //MODEL.print_world();
+    int X = 10;
+    for (int x = 0; x < X; x++) {
+        t1 = high_resolution_clock::now();
+        MODEL.create_world();  // create a possible world with a discrete ordering on the noiy values for each dimension
+        t2 = high_resolution_clock::now();
+        timetaken += (duration_cast<duration<double>>(t2 - t1)).count();
+        //MODEL.print_world();
 
-    // CREATE THE DATASET OBJECT
-    int N;
-    // cout << "Enter the number of Samples: "; 
-    samples_file >> N;
+        // CREATE THE DATASET OBJECT
+        // cout << "Enter the number of Samples: "; 
+        samples_file >> N;
 
-    if (new_data == "t" || new_model == "t") {
-        generate_datafile(N, D, dim_domains);          // create a dataset with attributes having noisy values
+        if (new_data == "t" || new_model == "t") {
+            //cout << "changing data" << endl;
+            generate_datafile(N, D, dim_domains);          // create a dataset with attributes having noisy values
+        }
+        
+        data DATA(N, D, dim_domains);        
+        //DATA.print(1);
+
+        // CREATE AN INSTANCE OF CONCRETE DATA (POSSIBLE WORLD WITH ERROR)
+        t1 = high_resolution_clock::now();
+        DATA.label_data(MODEL.world);
+        t2 = high_resolution_clock::now();
+        timetaken += (duration_cast<duration<double>>(t2 - t1)).count();
+        //cout << "Labeled Data: " << endl;
+        //DATA.print(1);
+
+        // FIND THE SKYLINE
+        t1 = high_resolution_clock::now();
+        skyline SKYLINES(N, D, DATA.DATA);
+        SKYLINES.finder();
+        
+        SKYLINES.find_dominance_sets();
+        //SKYLINES.print_dominance_sets();
+
+        SKYLINES.compute_jaccard_distances();
+        //SKYLINES.print_jaccard_distances();
+        
+        SKYLINES.represent();
+        t2 = high_resolution_clock::now();
+        timetaken += (duration_cast<duration<double>>(t2 - t1)).count();
+        skysize += SKYLINES.SKYLINE_SET.size();
     }
-    
-    data DATA(N, D, dim_domains);        
-    //DATA.print(1);
-
-    // CREATE AN INSTANCE OF CONCRETE DATA (POSSIBLE WORLD WITH ERROR)
-    t1 = high_resolution_clock::now();
-    DATA.label_data(MODEL.world);
-    t2 = high_resolution_clock::now();
-    timetaken += (duration_cast<duration<double>>(t2 - t1)).count();
-    //cout << "Labeled Data: " << endl;
-    //DATA.print(1);
-
-    // FIND THE SKYLINE
-    t1 = high_resolution_clock::now();
-    skyline SKYLINES(N, D, DATA.DATA);
-    SKYLINES.finder();
-    
-    SKYLINES.find_dominance_sets();
-    //SKYLINES.print_dominance_sets();
-
-    SKYLINES.compute_jaccard_distances();
-    SKYLINES.print_jaccard_distances();
-    
-    SKYLINES.represent();
-    t2 = high_resolution_clock::now();
-    timetaken += (duration_cast<duration<double>>(t2 - t1)).count();
-
-    cout << "Time taken: " << timetaken << " seconds" << endl;
+    //cout << "Number of Skylines: " << SKYLINES.SKYLINE_SET.size() << endl;
+    //cout << "Time taken: " << timetaken << " seconds" << endl;
+    cout << N << " " << skysize/X << " " << timetaken/X << endl;
     return 0;
 }
