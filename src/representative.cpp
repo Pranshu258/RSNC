@@ -9,7 +9,7 @@
 void skyline::represent() {
     map<int, list<int> > S = DOMINANCES;
     map<int, list<int> > A;
-    //cout << "SKYLINES IN REPRESENTATIVE ORDER:" << endl;
+    cout << "SKYLINES IN REPRESENTATIVE ORDER:" << endl;
     // Pick the skyline with highest dominance set
     int max = 0;
     map<int, list<int> >::iterator a;
