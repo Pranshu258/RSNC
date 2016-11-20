@@ -24,3 +24,4 @@ g++ -std=c++11 src/*.cpp -o bin/rsnc
 ## References
 * U. Feige, P. Raghavan, D. Peleg, and E. Upfal. Computing with noisy information. SIAM J. Comput., 23(5):1001{1018, 1994
 * Benoit Groz and Tova Milo. Skyline Queries with Noisy Comparisons. HAL Id: hal-01146568 https://hal.inria.fr/hal-01146568, 2015
+* George Valkanas, Apostolos N. Papadopoulos and Dimitrios Gunopulos SkyDiver: A Framework for Skyline Diversification
